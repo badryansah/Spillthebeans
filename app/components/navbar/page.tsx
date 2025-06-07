@@ -6,8 +6,9 @@ import { motion } from "framer-motion";
 
 const menu = [
   { name: "HOME", href: "/Home" },
-  { name: "ABOUT", href: "/about" },
+
   { name: "MENU", href: "/menu" },
+  { name: "GALLERY", href: "/gallery" },
   { name: "LOCATIONS", href: "/locations" },
 ];
 
@@ -21,7 +22,7 @@ const Navbar = () => {
         type: "spring",
         stiffness: 100,
       }}
-      className="flex justify-center items-center px-8 py-4 border-b border-gray-100 bg-transparent backdrop-blur"
+      className="flex justify-center items-center px-8 py-4 border-b border-gray-100 bg-transparent"
     >
       <div className="container max-w-7xl flex items-center justify-between font-poppins">
         {/* Logo */}
@@ -31,7 +32,13 @@ const Navbar = () => {
           transition={{ duration: 0.5 }}
           className="flex items-center"
         >
-          <Image src={Logo} alt="Logo" width={60} height={60} />
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={60}
+            height={60}
+            className="drop-shadow-lg"
+          />
         </motion.div>
 
         {/* Menu */}
@@ -62,22 +69,6 @@ const Navbar = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Button */}
-        <motion.div
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Link
-            href="/join-email"
-            className="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded transition-colors text-sm font-poppins font-semibold"
-          >
-            JOIN OUR EMAIL LIST
-          </Link>
-        </motion.div>
       </div>
     </motion.nav>
   );
