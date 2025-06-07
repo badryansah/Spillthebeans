@@ -3,16 +3,26 @@
 import React from "react";
 import Navbar from "../components/navbar/page";
 import Image from "next/image";
-import coffe1 from "../asset/Homeasset/coffe1.png";
-import coffe2 from "../asset/Homeasset/coffe2.png";
+import background from "../asset/Homeasset/background.jpg";
+import coffe1 from "../asset/Homeasset/cup.png";
 import "../styles/animations.css";
 
 const Home = () => {
   return (
-    <div className="min-h-screen relative bg-white overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={background}
+          alt="Background"
+          fill
+          priority
+          className="object-cover"
+        />
+      </div>
       <Navbar />
 
-      <main className="container mx-auto px-6 py-12">
+      <main className="container mx-auto px-6 py-12 relative z-10">
         <div className="flex flex-col items-center justify-center min-h-[80vh]">
           <div className="relative w-full max-w-7xl flex items-center justify-center">
             {/* Text Outline - Made Bigger and Thinner */}
@@ -35,7 +45,6 @@ const Home = () => {
                 Beans
               </span>
             </h1>
-
             {/* Floating Cups - Added Animations */}
             <div className="absolute -top-5 -left-32 z-10 animate-slide-from-left">
               <Image
@@ -44,18 +53,7 @@ const Home = () => {
                 width={600}
                 height={700}
                 style={{ objectFit: "contain" }}
-                className="drop-shadow-2xl opacity-95"
-                priority
-              />
-            </div>
-            <div className="absolute -top-50 -right-36 z-10 animate-slide-from-right">
-              <Image
-                src={coffe2}
-                alt="Coffee cup 2"
-                width={600}
-                height={700}
-                style={{ objectFit: "contain" }}
-                className="drop-shadow-2xl opacity-95"
+                className="drop-shadow-2xl "
                 priority
               />
             </div>
