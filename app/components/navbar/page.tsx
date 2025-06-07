@@ -2,37 +2,84 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../asset/logo/logo.png";
+import { motion } from "framer-motion";
+
+const menu = [
+  { name: "HOME", href: "/Home" },
+  { name: "ABOUT", href: "/about" },
+  { name: "MENU", href: "/menu" },
+  { name: "LOCATIONS", href: "/locations" },
+];
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-center items-center px-8 py-4 border-b border-gray-100">
-      <div className="container max-w-6xl flex justify-between items-center">
-        <div className="flex items-center">
-          <Image src={Logo} alt="Logo" width={40} height={40} />
+    <motion.nav
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 0.5,
+        type: "spring",
+        stiffness: 100,
+      }}
+      className="flex justify-center items-center px-8 py-4 border-b border-gray-100 bg-transparent backdrop-blur"
+    >
+      <div className="container max-w-7xl flex items-center justify-between font-poppins">
+        {/* Logo */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center"
+        >
+          <Image src={Logo} alt="Logo" width={60} height={60} />
+        </motion.div>
+
+        {/* Menu */}
+        <div className="flex gap-8 flex-1 justify-center">
+          {menu.map((item, index) => (
+            <motion.div
+              key={item.name}
+              initial={{ opacity: 0, scale: 0.9 }} // Changed from y translation to scale
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                delay: index * 0.1,
+                duration: 0.4,
+                ease: "easeOut",
+              }}
+            >
+              <Link
+                href={item.href}
+                className={`flex relative uppercase text-white tracking-widest text-sm px-2 py-1 hover:text-cyan-400 transition-colors font-poppins
+                  ${
+                    item.name === "HOME"
+                      ? "after:content-[''] after:block after:h-1 after:bg-cyan-400 after:mt-1 after:rounded"
+                      : ""
+                  }
+                `}
+              >
+                {item.name}
+              </Link>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="flex gap-12">
+        {/* Button */}
+        <motion.div
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <Link
-            href="/work"
-            className="uppercase text-sm font-medium tracking-wider hover:text-gray-600 transition-colors"
+            href="/join-email"
+            className="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded transition-colors text-sm font-poppins font-semibold"
           >
-            About
+            JOIN OUR EMAIL LIST
           </Link>
-          <Link
-            href="/about"
-            className="uppercase text-sm font-medium tracking-wider hover:text-gray-600 transition-colors"
-          >
-            gallery
-          </Link>
-          <Link
-            href="/work-with-us"
-            className="uppercase text-sm font-medium tracking-wider hover:text-gray-600 transition-colors"
-          >
-            Menu
-          </Link>
-        </div>
+        </motion.div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
